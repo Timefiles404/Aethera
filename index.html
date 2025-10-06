@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC插件工艺系统演示</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <h1>MC插件工艺系统演示</h1>
+            
+            <!-- 工艺台主界面 -->
+            <div class="crafting-interface">
+                <div class="crafting-grid">
+                    <!-- 配料位置 1-8 -->
+                    <div class="ingredient-slot" data-position="1">1</div>
+                    <div class="ingredient-slot" data-position="2">2</div>
+                    <div class="ingredient-slot" data-position="3">3</div>
+                    <div class="empty-slot"></div>
+                    
+                    <div class="ingredient-slot" data-position="4">4</div>
+                    <!-- 基础材料位置 (中间的√) -->
+                    <div class="base-material-slot" data-position="base">
+                        <span class="checkmark">✓</span>
+                    </div>
+                    <div class="ingredient-slot" data-position="5">5</div>
+                    <!-- 工艺按钮 -->
+                    <div class="craft-button" id="craftButton">
+                        <span class="arrow">→</span>
+                    </div>
+                    
+                    <div class="ingredient-slot" data-position="6">6</div>
+                    <div class="ingredient-slot" data-position="7">7</div>
+                    <div class="ingredient-slot" data-position="8">8</div>
+                    <!-- 结果槽 -->
+                    <div class="result-slot" id="resultSlot"></div>
+                </div>
+            </div>
+
+            <!-- 状态显示 -->
+            <div class="status-display">
+                <div class="current-stats" id="currentStats">
+                    <h3>当前属性预览</h3>
+                    <div class="stats-preview"></div>
+                </div>
+                <div class="crafting-status" id="craftingStatus">
+                    <h3>工艺状态</h3>
+                    <div class="status-text">等待材料放置...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧边栏 -->
+        <div class="sidebar">
+            <!-- 材料创建区域 -->
+            <div class="material-creation">
+                <h2>材料创建</h2>
+                <div class="creation-controls">
+                    <div class="material-type-selector">
+                        <label>
+                            <input type="radio" name="materialType" value="ingredient" checked>
+                            配料 (Material)
+                        </label>
+                        <label>
+                            <input type="radio" name="materialType" value="base">
+                            基础材料 (Working Resource)
+                        </label>
+                    </div>
+                    
+                    <div class="material-form">
+                        <input type="text" id="materialName" placeholder="材料名称">
+                        <input type="text" id="materialIcon" placeholder="图标 (emoji)" maxlength="2">
+                        
+                        <div class="stats-inputs">
+                            <h3>属性设置</h3>
+                            <div class="stat-group">
+                                <label>伤害: <input type="number" id="damage" value="0"></label>
+                                <label>暴击伤害: <input type="number" id="critDamage" value="0"></label>
+                                <label>生命值: <input type="number" id="health" value="0"></label>
+                                <label>防御值: <input type="number" id="defense" value="0"></label>
+                            </div>
+                            
+                            <div class="modify-stats">
+                                <h4>修改属性 (%)</h4>
+                                <label>左修改: <input type="number" id="modifyLeft" value="0"></label>
+                                <label>右修改: <input type="number" id="modifyRight" value="0"></label>
+                                <label>上修改: <input type="number" id="modifyUp" value="0"></label>
+                                <label>下修改: <input type="number" id="modifyDown" value="0"></label>
+                            </div>
+                            
+                            <div class="level-requirements">
+                                <h4>等级需求</h4>
+                                <label>主等级: <input type="number" id="mainLevel" value="1"></label>
+                                <label>副职等级: <input type="number" id="subLevel" value="1"></label>
+                            </div>
+                        </div>
+                        
+                        <button id="createMaterial">创建材料</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 材料库存 -->
+            <div class="material-inventory">
+                <h2>材料库存</h2>
+                <div class="inventory-grid" id="inventoryGrid">
+                    <!-- 创建的材料会显示在这里 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

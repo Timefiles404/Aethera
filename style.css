@@ -1,0 +1,512 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 30px;
+    min-height: 85vh;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 工艺台界面 */
+.crafting-interface {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 3px solid #ddd;
+}
+
+.crafting-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(4, 80px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.ingredient-slot, .base-material-slot, .result-slot, .empty-slot, .craft-button {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #666;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.ingredient-slot {
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    color: #666;
+    cursor: pointer;
+}
+
+.ingredient-slot:hover {
+    background: linear-gradient(145deg, #d4edda, #c3e6cb);
+    border-color: #28a745;
+}
+
+.ingredient-slot.occupied {
+    background: linear-gradient(145deg, #fff3cd, #ffeaa7);
+    border-color: #ffc107;
+}
+
+.base-material-slot {
+    background: linear-gradient(145deg, #d1ecf1, #bee5eb);
+    border-color: #17a2b8;
+    font-size: 24px;
+}
+
+.base-material-slot .checkmark {
+    color: #17a2b8;
+    font-size: 30px;
+}
+
+.base-material-slot.occupied .checkmark {
+    display: none;
+}
+
+.craft-button {
+    background: linear-gradient(145deg, #f8d7da, #f5c6cb);
+    border-color: #dc3545;
+    cursor: pointer;
+    font-size: 24px;
+    color: #dc3545;
+}
+
+.craft-button:hover {
+    background: linear-gradient(145deg, #dc3545, #c82333);
+    color: white;
+    transform: scale(1.05);
+}
+
+.craft-button.crafting {
+    background: linear-gradient(145deg, #ffc107, #e0a800);
+    border-color: #ffc107;
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.result-slot {
+    background: linear-gradient(145deg, #d4edda, #c3e6cb);
+    border-color: #28a745;
+}
+
+.empty-slot {
+    background: transparent;
+    border: none;
+}
+
+/* 材料显示 */
+.material-item {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    transition: all 0.3s ease;
+    position: relative;
+    font-size: 12px;
+    text-align: center;
+    flex-shrink: 0;
+    padding: 5px;
+}
+
+.material-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: #667eea;
+}
+
+.material-item:active {
+    cursor: grabbing;
+}
+
+.material-icon {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.material-name {
+    font-size: 9px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60px;
+    text-align: center;
+    line-height: 1;
+}
+
+/* 材料创建区域 */
+.material-creation {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    flex-shrink: 0;
+}
+
+.material-creation h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.material-type-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.material-type-selector label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.material-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.material-form input {
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.material-form input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.stats-inputs {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.stats-inputs h3, .stats-inputs h4 {
+    color: #555;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.stat-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.stat-group label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.stat-group input {
+    width: 70px;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.modify-stats {
+    margin-bottom: 15px;
+}
+
+.modify-stats label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.modify-stats input {
+    width: 70px;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.level-requirements label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.level-requirements input {
+    width: 70px;
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#createMaterial {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+    font-size: 14px;
+}
+
+#createMaterial:hover {
+    transform: translateY(-2px);
+}
+
+/* 材料库存 */
+.material-inventory {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+.material-inventory h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.inventory-grid {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0;
+    min-height: 90px;
+    max-height: 90px;
+    align-items: center;
+}
+
+.inventory-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.inventory-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.inventory-grid::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.inventory-grid::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.inventory-item {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #666;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.inventory-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.inventory-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+}
+
+/* 状态显示 */
+.status-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.current-stats, .crafting-status {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.current-stats h3, .crafting-status h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.stats-preview {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    min-height: 80px;
+    font-size: 14px;
+}
+
+.status-text {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* 拖拽相关样式 */
+.drag-over {
+    background: rgba(40, 167, 69, 0.2) !important;
+    border-color: #28a745 !important;
+    border-style: dashed !important;
+}
+
+.drop-zone {
+    position: relative;
+}
+
+.drop-zone::after {
+    content: "放置材料";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #28a745;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.drop-zone.drag-over::after {
+    opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr 350px;
+        gap: 20px;
+    }
+    
+    .sidebar {
+        max-height: 80vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 20px;
+    }
+    
+    .main-content {
+        order: 1;
+    }
+    
+    .sidebar {
+        order: 2;
+        max-height: none;
+        overflow-y: visible;
+    }
+    
+    .crafting-grid {
+        grid-template-columns: repeat(4, 60px);
+        gap: 8px;
+    }
+    
+    .slot {
+        width: 60px;
+        height: 60px;
+        font-size: 12px;
+    }
+    
+    .status-display {
+        grid-template-columns: 1fr;
+    }
+    
+    .material-creation, .material-inventory {
+        margin-bottom: 20px;
+    }
+}
