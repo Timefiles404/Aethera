@@ -1,0 +1,198 @@
+# MC插件工艺系统配置文件
+
+# 界面文本配置
+ui:
+  title: "MC插件工艺系统演示"
+  craft_button_text: "→"
+  craft_button_processing: "⏳"
+  
+  # 状态消息
+  messages:
+    waiting_materials: "等待材料放置..."
+    crafting_in_progress: "工艺进行中... %d秒"
+    crafting_complete: "工艺完成！"
+    no_base_material: "请先放置基础材料！"
+    no_ingredients: "请至少放置一个配料！"
+    level_insufficient: "等级不足！需要主等级%d，副职等级%d"
+    wrong_material_type_base: "基础材料槽只能放置基础材料！"
+    wrong_material_type_ingredient: "配料槽只能放置配料！"
+    enter_material_name: "请输入材料名称！"
+
+# 游戏设置
+game:
+  # 玩家等级设置
+  player_level: 10
+  player_sub_level: 5
+  
+  # 工艺时间（秒）
+  crafting_time: 10
+  
+  # 音效设置
+  sound:
+    enabled: true
+    frequency_start: 440
+    frequency_end: 880
+    duration: 0.1
+    volume: 0.3
+
+# 材料类型配置
+material_types:
+  ingredient:
+    name: "配料"
+    category: "Material"
+    description: "用于增强基础材料属性的配料"
+  
+  base:
+    name: "基础材料"
+    category: "Working Resource"
+    description: "工艺的基础材料，决定最终物品类型"
+
+# 属性配置
+stats:
+  damage:
+    name: "伤害"
+    icon: "⚔️"
+    color: "#dc3545"
+  
+  crit_damage:
+    name: "暴击伤害"
+    icon: "💥"
+    color: "#ffc107"
+  
+  health:
+    name: "生命值"
+    icon: "❤️"
+    color: "#28a745"
+  
+  defense:
+    name: "防御值"
+    icon: "🛡️"
+    color: "#007bff"
+
+# 修改属性配置
+modify_stats:
+  left:
+    name: "左修改"
+    description: "影响左侧材料的属性"
+    direction: "←"
+  
+  right:
+    name: "右修改"
+    description: "影响右侧材料的属性"
+    direction: "→"
+  
+  up:
+    name: "上修改"
+    description: "影响上方材料的属性"
+    direction: "↑"
+  
+  down:
+    name: "下修改"
+    description: "影响下方材料的属性"
+    direction: "↓"
+
+# 工艺台布局配置
+crafting_layout:
+  grid_size: 4
+  positions:
+    ingredients: [1, 2, 3, 4, 5, 6, 7, 8]
+    base_material: "base"
+    result: "result"
+    craft_button: "craft"
+
+# 示例材料配置
+sample_materials:
+  - name: "铁剑"
+    icon: "⚔️"
+    type: "base"
+    stats:
+      damage: 10
+      crit_damage: 5
+      health: 0
+      defense: 0
+    level_requirements:
+      main: 1
+      sub: 1
+  
+  - name: "强化石"
+    icon: "💎"
+    type: "ingredient"
+    stats:
+      damage: 5
+      crit_damage: 0
+      health: 0
+      defense: 0
+    modify_stats:
+      right: 10
+    level_requirements:
+      main: 2
+      sub: 1
+  
+  - name: "生命宝石"
+    icon: "❤️"
+    type: "ingredient"
+    stats:
+      damage: 0
+      crit_damage: 0
+      health: 20
+      defense: 0
+    modify_stats:
+      down: 15
+    level_requirements:
+      main: 3
+      sub: 2
+  
+  - name: "防御符文"
+    icon: "🛡️"
+    type: "ingredient"
+    stats:
+      damage: 0
+      crit_damage: 0
+      health: 0
+      defense: 8
+    modify_stats:
+      left: 5
+    level_requirements:
+      main: 2
+      sub: 1
+  
+  - name: "暴击水晶"
+    icon: "💥"
+    type: "ingredient"
+    stats:
+      damage: 0
+      crit_damage: 15
+      health: 0
+      defense: 0
+    modify_stats:
+      up: 20
+    level_requirements:
+      main: 4
+      sub: 3
+  
+  - name: "魔法木材"
+    icon: "🪵"
+    type: "base"
+    stats:
+      damage: 3
+      crit_damage: 2
+      health: 5
+      defense: 2
+    level_requirements:
+      main: 1
+      sub: 1
+
+# 界面主题配置
+theme:
+  primary_color: "#667eea"
+  secondary_color: "#764ba2"
+  success_color: "#28a745"
+  warning_color: "#ffc107"
+  danger_color: "#dc3545"
+  info_color: "#17a2b8"
+  
+  # 自定义模型数据支持
+  custom_model_data:
+    enabled: true
+    base_value: 1000
+    increment: 1
